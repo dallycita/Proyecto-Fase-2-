@@ -5,13 +5,7 @@ import java.util.*;
  * La primera cadena representa el operador, y las siguientes son los operandos.
  */
 class Evaluator {
-    /**
-     * Evalúa una expresión en forma de lista de cadenas.
-     * 
-     * @param expression Lista de cadenas donde el primer elemento es el operador y los siguientes son operandos.
-     * @return El resultado de aplicar el operador a los operandos. Si la lista está vacía, devuelve 0.
-     * @throws NumberFormatException Si algún operando no es un número válido.
-     */
+    // Hacer el método 'evaluate' estático
     public static int evaluate(List<String> expression) {
         if (expression.isEmpty()) {
             return 0;
@@ -20,11 +14,53 @@ class Evaluator {
         String operator = expression.get(0);
         List<Integer> operands = new ArrayList<>();
 
+        // Convertir los operandos de String a Integer
         for (int i = 1; i < expression.size(); i++) {
             operands.add(Integer.parseInt(expression.get(i)));
         }
 
-        Operator op = OperatorFactory.createOperator(operator);
-        return op.apply(operands);
+        if (operator.equals("+")) {
+            return applyAddition(operands);
+        } else if (operator.equals("-")) {
+            return applySubtraction(operands);
+        } else if (operator.equals("*")) {
+            return applyMultiplication(operands);
+        } else if (operator.equals("/")) {
+            return applyDivision(operands);
+        }
+
+        return 0;
+    }
+
+    private static int applyAddition(List<Integer> operands) {
+        int result = 0;
+        for (int num : operands) {
+            result += num;
+        }
+        return result;
+    }
+
+    private static int applySubtraction(List<Integer> operands) {
+        int result = operands.get(0);
+        for (int i = 1; i < operands.size(); i++) {
+            result -= operands.get(i);
+        }
+        return result;
+    }
+
+    private static int applyMultiplication(List<Integer> operands) {
+        int result = 1;
+        for (int num : operands) {
+            result *= num;
+        }
+        return result;
+    }
+
+    private static int applyDivision(List<Integer> operands) {
+        int result = operands.get(0);
+        for (int i = 1; i < operands.size(); i++) {
+            result /= operands.get(i);
+        }
+        return result;
     }
 }
