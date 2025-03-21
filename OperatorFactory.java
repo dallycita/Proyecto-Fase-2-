@@ -20,7 +20,7 @@ class OperatorFactory {
 
     /**
      * Devuelve una instancia del operador correspondiente al símbolo dado.
-     * 
+     *
      * @param operator El símbolo del operador ("+", "-", "*", "/").
      * @return Una instancia de la implementación de Operator correspondiente, o null si no se encuentra.
      */
