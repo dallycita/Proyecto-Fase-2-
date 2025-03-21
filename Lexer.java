@@ -1,10 +1,35 @@
 import java.util.*;
 
-// Lexer: Divide la entrada en tokens
+// Lexer: Tokeniza el input de Lisp
 class Lexer {
-    public List<String> tokenize(String input) {
-        // Aquí solo separamos los paréntesis y las palabras por espacios
-        return new ArrayList<>(Arrays.asList(input.replace("(", " ( ").replace(")", " ) ").split("\\s+")));
+    public static List<String> tokenize(String input) {
+        List<String> tokens = new ArrayList<>();
+        StringBuilder token = new StringBuilder();
+
+        for (char c : input.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                if (token.length() > 0) {
+                    tokens.add(token.toString());
+                    token.setLength(0);
+                }
+            } else if (c == '(' || c == ')') {
+                if (token.length() > 0) {
+                    tokens.add(token.toString());
+                    token.setLength(0);
+                }
+                tokens.add(String.valueOf(c));  // Añadir paréntesis como tokens separados
+            } else {
+                token.append(c);
+            }
+        }
+        
+        // Añadir el último token si lo hay
+        if (token.length() > 0) {
+            tokens.add(token.toString());
+        }
+        return tokens;
     }
 }
+
+
 

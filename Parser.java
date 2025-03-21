@@ -1,27 +1,24 @@
-// Parser: Convierte los tokens en una lista de expresiones
+import java.util.*;
 class Parser {
-    public Object parse(List<String> tokens) {
-        if (tokens.isEmpty()) return null;
-        String token = tokens.remove(0);
+    private static int currentIndex = 0;
 
-        // Si encontramos un paréntesis de apertura, es una lista (expresión)
+    public static List<String> parse(List<String> tokens) {
+        if (currentIndex >= tokens.size()) return new ArrayList<>();
+
+        String token = tokens.get(currentIndex);
+        List<String> expression = new ArrayList<>();
+
         if (token.equals("(")) {
-            List<Object> expr = new ArrayList<>();
-            // Mientras no lleguemos al paréntesis de cierre, seguimos añadiendo elementos
-            while (!tokens.get(0).equals(")")) {
-                expr.add(parse(tokens));
+            currentIndex++;
+            while (!tokens.get(currentIndex).equals(")")) {
+                expression.addAll(parse(tokens));
             }
-            tokens.remove(0); // Eliminamos el paréntesis de cierre
-            return expr;
-        } else if (isNumber(token)) {
-            return Integer.parseInt(token); // Si es un número, lo convertimos
-        } else {
-            return token; // Si no es número, lo consideramos un nombre (símbolo)
+            currentIndex++;  // Consumir ')'
+            return expression;
         }
-    }
 
-    // Método para verificar si un token es un número
-    private boolean isNumber(String token) {
-        return token.matches("-?\\d+");
+        currentIndex++;
+        expression.add(token);
+        return expression;
     }
 }
