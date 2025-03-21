@@ -1,7 +1,16 @@
 import java.util.*;
 
-// Lexer: Tokeniza el input de Lisp
+/**
+ * La clase Lexer se encarga de tokenizar una entrada de texto en formato Lisp.
+ * Separa los paréntesis y los identificadores en una lista de tokens.
+ */
 class Lexer {
+    /**
+     * Tokeniza una cadena de entrada en una lista de tokens para su posterior análisis.
+     * 
+     * @param input La cadena de entrada en formato Lisp.
+     * @return Una lista de tokens extraídos de la entrada.
+     */
     public static List<String> tokenize(String input) {
         List<String> tokens = new ArrayList<>();
         StringBuilder token = new StringBuilder();
