@@ -22,6 +22,6 @@ public class LispInterpreter {
         
         // Evaluar la expresión y mostrar el resultado
         int result = Evaluator.evaluate(parsedExpression);
-        System.out.println("Resultado: " + result);  // Debería mostrar el resultado de la evaluación
+        System.out.println("Resultado: " + result);  // Debería mostrar 6
     }
 }
